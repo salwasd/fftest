@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Stagiaire Detail</h2>
+  <p><strong>Name:</strong> {{ stagiaire.name }}</p>
+  <p><strong>Last Name:</strong> {{ stagiaire.last_name }}</p>
+  <p><strong>CIN:</strong> {{ stagiaire.cin }}</p>
+  <p><strong>Email:</strong> {{ stagiaire.email }}</p>
+  <p><strong>Phone:</strong> {{ stagiaire.phone }}</p>
+  <p><strong>Date d'arrivé:</strong> {{ stagiaire.date_arr }}</p>
+  <p><strong>Date du fin du stage:</strong> {{ stagiaire.date_fin }}</p>
+  <p><strong>Departement:</strong> {{ stagiaire.departement }}</p>
+    <p><strong>Encadrant:</strong> {{ stagiaire.encadrent}} {{stagiaire.encadrent.last_name}}</p>
+    <p><strong>Ecole:</strong> {{ stagiaire.ecole }}</p>
+    <p><strong>Filiére:</strong> {{ stagiaire.filiere }}</p>
+    <p><strong>Sujet:</strong> {{ stagiaire.sujet }}</p>
+
+  
+
+  {% if cv %}
+    <p>CV: <a href="{{ cv }}" download>Download CV</a></p>
+  {% else %}
+    <p>No CV available.</p>
+  {% endif %}
+
+  {% if convocation %}
+    <p>Convocation: <a href="{{ convocation.pdf_file.url }}" target="_blank">{{ convocation.name }}</a></p>
+  {% else %}
+    <p>No convocation available.</p>
+  {% endif %}
+
+  <a href="{% url 'stagiaire_edit' stagiaire.id %}">Edit</a>
+  <br>
+  <a href="{% url 'stagiaire_list' %}">Back to Stagiaire List</a>
+{% endblock %}

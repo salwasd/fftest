@@ -1,0 +1,29 @@
+<!-- stagiaire_list.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Stagiaire List{% endblock %}
+
+{% block content %}
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <h2>Stagiaire List</h2>
+    <ul>
+        {% for stagiaire in stagiaires %}
+            <li>
+                <a href="{% url 'stagiaire_detail' stagiaire.id %}">{{ stagiaire.name }} {{ stagiaire.last_name }}</a>
+                - {{ stagiaire.status }}
+                <form method="post" action="{% url 'stagiaire_delete' stagiaire.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'stagiaire_add' %}">Add New Stagiaire</a>
+{% endblock %}

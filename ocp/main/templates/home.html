@@ -1,0 +1,51 @@
+<!-- home.html -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Intern Calendar{% endblock %}
+
+{% block content %}
+    <h2>Intern Calendar</h2>
+    <h3>Number of Interns in {{ month_name }} {{ year }}</h3>
+    <p>There are {{ num_interns }} interns in the current month.</p>
+
+    <div class="calendar">
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="7">{{ month_name }} {{ year }}</th>
+                </tr>
+                <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for week in calendar %}
+                    <tr>
+                        {% for day in week %}
+                            {% if day == 0 %}
+                                <td class="blank"></td>
+                            {% else %}
+                                <td class="{% if day|add:'1' < current_date.day and month == current_date.month and year == current_date.year %}past{% elif day in dates_with_stagiaires %}present{% endif %}">
+                                    {{ day }}
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="navigation">
+        <a href="?month={{ prev_month }}">Previous</a>
+        <a href="?month={{ next_month }}">Next</a>
+    </div>
+
+    <a href="{% url 'stagiaire_list' %}" class="btn btn-secondary">Back to Stagiaire List</a>
+{% endblock %}
