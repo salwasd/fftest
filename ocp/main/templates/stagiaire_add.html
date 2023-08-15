@@ -1,11 +1,11 @@
 <!-- stagiaire_add.html -->
 
 {% extends 'base.html' %}
-{% load static %}
+
 {% block title %}Add Stagiaire{% endblock %}
 
 {% block content %}
-    <h2>Add Stagiaire</h2>
+   
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -13,11 +13,83 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <div class="container-fluid" style=" width:70%;
     
-        <button type="submit" class="btn btn-primary">Save</button>
-    </form>
-    <a href="{% url 'stagiaire_list' %}" class="btn btn-secondary">Back to Stagiaire List</a>
+    align-items: center;">
+          <div class="row">
+              <div class="col-md-12">
+                  
+  <div class="card border-success mb-2 ms-4 me-4" >
+      <div class="card-header">add intern</div>
+      <div class="card-body">
+      
+  <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-6">
+                <!-- Fields for the first column -->
+                <label class="form-label mt-4">first name</label>
+                {{ form.name }}
+                <label class="form-label mt-4">last name</label>
+                {{ form.last_name }}
+                <label class="form-label mt-4"> CIN</label>
+                {{ form.cin }}
+                <label class="form-label mt-4">start date</label>
+                {{ form.date_arr }}
+                <label class="form-label mt-4">end Date</label>
+                {{ form.date_fin }}
+                <label class="form-label mt-4">Subject</label>
+                {{ form.sujet }}
+                <label class="form-label mt-4">Email</label>
+                {{ form.email }}
+            </div>
+            <div class="col-md-6">
+                <!-- Fields for the second column -->
+                
+               
+                <label class="form-label mt-4">phone</label>
+                {{ form.phone }}
+                <label class="form-label mt-4">CV</label>
+                {{ form.cv }}
+                <label class="form-label mt-4">School</label>
+                {{ form.ecole }}
+                <br>
+                <label class="form-label mt-4">Major</label>
+                {{ form.filiere }}
+                <br>
+                <label class="form-label mt-4">Departement</label>
+                {{ form.departement }}
+                <br>
+                <label class="form-label mt-4">supervisor</label>
+                {{ form.encadrent }}
+                
+            </div>
+        </div>
+        
+        <hr>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-outline-success btn-block">Save</button>
+            </div>
+            <div class="col-md-6 text-end">
+                <a href="{% url 'encadrant_list' %}" class="btn btn-danger btn-block">Cancel</a>
+            </div>
+        </div>
+      </form>
+     
+      
+  
+  
+      </div>
+          </div>
+  
+  <style>
+    .form-select.form-select-lg {
+        font-size: 16px;
+        padding: 12px;
+        height: auto;
+        width: 100%;
+    }
+      
 {% endblock %}

@@ -1,35 +1,73 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Stagiaire Detail</h2>
-  <p><strong>Name:</strong> {{ stagiaire.name }}</p>
-  <p><strong>Last Name:</strong> {{ stagiaire.last_name }}</p>
-  <p><strong>CIN:</strong> {{ stagiaire.cin }}</p>
-  <p><strong>Email:</strong> {{ stagiaire.email }}</p>
-  <p><strong>Phone:</strong> {{ stagiaire.phone }}</p>
-  <p><strong>Date d'arrivé:</strong> {{ stagiaire.date_arr }}</p>
-  <p><strong>Date du fin du stage:</strong> {{ stagiaire.date_fin }}</p>
-  <p><strong>Departement:</strong> {{ stagiaire.departement }}</p>
-    <p><strong>Encadrant:</strong> {{ stagiaire.encadrent}} {{stagiaire.encadrent.last_name}}</p>
-    <p><strong>Ecole:</strong> {{ stagiaire.ecole }}</p>
-    <p><strong>Filiére:</strong> {{ stagiaire.filiere }}</p>
-    <p><strong>Sujet:</strong> {{ stagiaire.sujet }}</p>
+
+  <div class="container center " style=" 
+  justify-content: center;
+  width: 50%;">
+    <div class="row">
+        <div class="col-md-12">
+            
+<div class="card border-success"   >
+<div class="card-header">Intern info </div>
+<div class="card-body ">
+  <div class="column" style=" float: left;
+ ">
+ <p><strong>Name:</strong> {{ stagiaire.name }}</p>
+ <br>
+<p><strong>Last Name:</strong> {{ stagiaire.last_name }}</p>
+<br>
+<p><strong>CIN:</strong> {{ stagiaire.cin }}</p>
+<br>
+<p><strong>Email:</strong> {{ stagiaire.email }}</p>
+<br>
+<p><strong>Phone:</strong> {{ stagiaire.phone }}</p>
+<br>
+<p><strong>Start date:</strong> {{ stagiaire.date_arr }}</p>
+<br>
+<p><strong>End date:</strong> {{ stagiaire.date_fin }}</p>
+</div>
+<div class="column" style=" float: right;
+">
+<p><strong>Departement:</strong> {{ stagiaire.departement }}</p>
+<br>
+<p><strong>Supervisor:</strong> {{ stagiaire.encadrent}} {{stagiaire.encadrent.last_name}}</p>
+<br>
+<p><strong>school:</strong> {{ stagiaire.ecole }}</p>
+<br>
+<p><strong>Major:</strong> {{ stagiaire.filiere }}</p>
+<br>
+<p><strong>Subject:</strong> {{ stagiaire.sujet }}</p>
+<br>
+
+
+
+{% if cv %}
+<p>CV: <a href="{{ cv }}" download>Download CV</a></p>
+{% else %}
+<p>No CV available.</p>
+{% endif %}
+<br>
+{% if convocation %}
+<p>Convocation: <a href="{{ convocation.pdf_file.url }}" target="_blank">{{ convocation.name }}</a></p>
+{% else %}
+<p>No convocation available.</p>
+{% endif %}
+
+</div>
+
+</div>
+<hr>
+<div class="row mb-3 mt-2 ml-3 mr-3">
+  <div class="col-md-6">
+      <a href="{% url 'stagiaire_edit' stagiaire.id %}" class="btn btn-outline-warning btn-block">Edit</a>
+  </div>
+  <div class="col-md-6 text-end">
+      <a href="{% url 'stagiaire_list' %}" class="btn btn-danger btn-block">Cancel</a>
+  </div>
+</div>
+    </div>
 
   
-
-  {% if cv %}
-    <p>CV: <a href="{{ cv }}" download>Download CV</a></p>
-  {% else %}
-    <p>No CV available.</p>
-  {% endif %}
-
-  {% if convocation %}
-    <p>Convocation: <a href="{{ convocation.pdf_file.url }}" target="_blank">{{ convocation.name }}</a></p>
-  {% else %}
-    <p>No convocation available.</p>
-  {% endif %}
-
-  <a href="{% url 'stagiaire_edit' stagiaire.id %}">Edit</a>
-  <br>
-  <a href="{% url 'stagiaire_list' %}">Back to Stagiaire List</a>
+</div>
 {% endblock %}

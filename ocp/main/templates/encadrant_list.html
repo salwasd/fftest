@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <form method="GET" action="{% url 'encadrant_list' %}" class="mb-3">
+                <div class="input-group">
+                    <input type="text" name="search" class="form-control" placeholder="Search by name...">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-outline-secondary">Search</button>
+                    </div>
+                </div>
+            </form>
+
+            <div class="card border-success mb-3">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                  <span>Supervisors List</span>
+                  <a href="{% url 'encadrant_add' %}" class="btn btn-outline-success ">Add</a>
+              </div>
+  
+    <div class="card-body">
+    
+     <div class="table-responsive">
+                              <table class="table table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">full name </th>
+                                      <th scope="col">Departement</th>
+                                     <th scope="col">  </th>
+                                     <th scope="col">  </th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                     {% for encadrant in encadrants %}
+                                      <tr>
+                                          <td scope="row">{{ encadrant.name }} {{ encadrant.last_name }}</td>
+                                         <td>{{ encadrant.departement }}</td>
+                                        
+                                        <td>
+                                          <a href="{% url 'encadrant_detail' encadrant.id %}" class="btn btn-outline-success mr-6">intern history</a>  
+                                        </td>
+                                        <td>
+                                                
+                                            <form method="post" action="{% url 'encadrant_delete' encadrant.id %}">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                            </form></td>
+                                    <td>
+                                    </tr>
+                                      {%endfor%}
+                                  </tbody>
+                                </table>
+                                <hr>
+                                    
+                               
+                          </div>
+    </div>
+  </div>
+{% endblock %}

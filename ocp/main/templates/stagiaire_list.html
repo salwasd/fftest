@@ -1,10 +1,9 @@
-<!-- stagiaire_list.html -->
 {% extends 'base.html' %}
-{% load static %}
 
 {% block title %}Stagiaire List{% endblock %}
 
 {% block content %}
+
     {% if messages %}
         <ul class="messages">
             {% for message in messages %}
@@ -12,18 +11,59 @@
             {% endfor %}
         </ul>
     {% endif %}
-    <h2>Stagiaire List</h2>
-    <ul>
-        {% for stagiaire in stagiaires %}
-            <li>
-                <a href="{% url 'stagiaire_detail' stagiaire.id %}">{{ stagiaire.name }} {{ stagiaire.last_name }}</a>
-                - {{ stagiaire.status }}
-                <form method="post" action="{% url 'stagiaire_delete' stagiaire.id %}">
-                    {% csrf_token %}
-                    <button type="submit">Delete</button>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="GET" action="{% url 'stagiaire_list' %}" class="mb-3">
+                    <div class="input-group">
+                        <input type="text" name="search" class="form-control" placeholder="Search by name...">
+                        
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-secondary">Search</button>
+                        </div>
+                    </div>
                 </form>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'stagiaire_add' %}">Add New Stagiaire</a>
+                
+                <div class="card border-success mb-3">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>Interns List</span>
+                        <a href="{% url 'stagiaire_add' %}" class="btn btn-outline-success ">Add</a>
+                    </div>
+                    
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Full Name</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col"></th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for stagiaire in stagiaires %}
+                                        <tr>
+                                            <td scope="row">{{ stagiaire.name }} {{ stagiaire.last_name }}</td>
+                                            <td>{{ stagiaire.status }}</td>
+                                            <td>
+                                                <form method="post" action="{% url 'stagiaire_delete' stagiaire.id %}">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-outline-danger"><i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                            <td>
+                                                <a href="{% url 'stagiaire_detail' stagiaire.id %}" class="btn btn-outline-info">Info</a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

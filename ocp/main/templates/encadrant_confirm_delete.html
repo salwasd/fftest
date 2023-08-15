@@ -1,0 +1,13 @@
+<!-- encadrant_confirm_delete.html -->
+{% extends 'base.html' %}
+{% block title %}Confirm Delete{% endblock %}
+
+{% block content %}
+    <h2>Confirm Delete</h2>
+    <p>Are you sure you want to delete the stagiaire: {{ encadrant.name }} {{ encadrant.last_name }}?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Delete</button>
+    </form>
+    <a href="{% url 'encadrant_list' %}">Cancel</a>
+{% endblock %}

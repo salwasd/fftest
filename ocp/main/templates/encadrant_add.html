@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Add encadrant{% endblock %}
+
+{% block content %}
+   
+{% if messages %}
+<div class="messages">
+  {% for message in messages %}
+    <div class="alert {{ message.tags }}">{{ message }}</div>
+  {% endfor %}
+</div>
+{% endif %}
+<div class="container-fluid" style="width: 50%; align-items: center;">
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="card border-success mb-2 ms-4 me-4 mt-4" >
+                <div class="card-header">Add Supervisor</div>
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+<hr>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-outline-success btn-block">Save</button>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <a href="{% url 'encadrant_list' %}" class="btn btn-danger btn-block">Cancel</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .form-select.form-select-lg {
+        font-size: 16px;
+        padding: 12px;
+        height: auto;
+        width: 100%;
+    }
+</style>
+
+{% endblock %}

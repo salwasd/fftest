@@ -30,5 +30,9 @@ urlpatterns = [
     path('stagiaires/add/', views.stagiaire_add, name='stagiaire_add'),
     path('stagiaires/<int:pk>/edit/', views.stagiaire_edit, name='stagiaire_edit'),
     path('stagiaires/<int:pk>/delete/', views.stagiaire_delete, name='stagiaire_delete'),
+    path('encadrants/', views.encadrant_list, name='encadrant_list'),
+    path('encadrants/<int:encad_id>/', views.encadrant_detail, name='encadrant_detail'),
+    path('encadrants/<int:encad_id>/delete/', views.encadrant_delete, name='encadrant_delete'),
+    path('encadrants/add/', views.encadrant_add, name='encadrant_add'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
